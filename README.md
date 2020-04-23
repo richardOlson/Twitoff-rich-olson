@@ -24,7 +24,7 @@ export FLASK_APP=hello.py
 flask run
 
 # Windows alternatively:
-set FLASK_APP=hello.py
+set FLASK_APP=web_app
 flask run
 
 '''
