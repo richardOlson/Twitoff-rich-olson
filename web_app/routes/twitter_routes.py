@@ -39,3 +39,10 @@ def list_users():
     ]
     message = "Users currently found in our database"
     return render_template("users.html", message=message, users=users)
+
+
+#This is the route that is used to add a new user to the database
+@twitter_routes.route("/new_user")
+def add_user():
+    print("We are adding the user")
+    return render_template("new_user.html")

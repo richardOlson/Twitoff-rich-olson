@@ -8,6 +8,7 @@ from web_app.routes.twitter_routes import twitter_routes
 # creating the app the an app factory
 def create_app():
     app = Flask(__name__)
+    
     app.register_blueprint(home_routes)
     app.register_blueprint(twitter_routes)
 

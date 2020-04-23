@@ -1,0 +1,17 @@
+
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+    <p>{{ message }}</p>
+
+    <form action="/new_user" >
+        
+        <button type="button" class="btn btn-primary">Add Users</button>
+    </form>
+
+    <form action="/twitter_users" >
+        <button type="button" class="btn btn-success">Show Users</button>  
+    </form>
+{% endblock %}

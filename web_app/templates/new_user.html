@@ -1,0 +1,29 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div>
+    <h1>Add a new user</h1>
+</div>
+<p>Please fill out the form and then submit to add to user list</p>
+
+<form action="/user_add" method="POST">
+    <label for="username">Twitter username</label>
+    <input type="text" name="username" id="f_name">
+
+    <label for="tweet">Optional: tweet by user</label>
+    <input type="text" name="tweet" id="tweet">
+
+
+    <button>Submit</button>
+
+</form>
+
+
+
+
+
+{% endblock %}

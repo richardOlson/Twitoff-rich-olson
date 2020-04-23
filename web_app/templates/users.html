@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twittoff App</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+{% if users %}
     <h2>Users</h2>
     <p>{{ message  }}</p>
     <ul>
@@ -14,6 +12,8 @@
         {% endfor %}
 
     </ul>
+{% else %}
+    <p>No Users are found</p>    
+{% endif %}
     
-</body>
-</html>
+{% endblock %}
