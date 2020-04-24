@@ -8,7 +8,7 @@
 # and then will display all their tweets
 
 # doing the imports
-from flask import Flask, jsonify , render_template
+from flask import Flask, jsonify , render_template , request
 from flask import Blueprint
 
 
@@ -29,7 +29,7 @@ def list_users_json():
 
 # This is the funtion that will allow the return of the
 # data but in a HTML page
-@twitter_routes.route("/twitter_users")
+@twitter_routes.route("/twitter_users" , methods=["GET", "POST"])
 def list_users():
     users = [
         {"name": "John Doe"},
@@ -41,8 +41,18 @@ def list_users():
     return render_template("users.html", message=message, users=users)
 
 
-#This is the route that is used to add a new user to the database
-@twitter_routes.route("/new_user")
-def add_user():
+#This is the route that is used to render the form that will allow you
+# to then enter the information to add a user to the database
+@twitter_routes.route("/new_user" , methods=["POST"])
+def user_form():
     print("We are adding the user")
     return render_template("new_user.html")
+
+# This is the route for when a twitter user name is added
+# 
+@twitter_routes.route("/user_add", methods=["POST", "GET"])
+def user_add():
+    print("Have entered the route where the form is being passed")
+    return jsonify({"message": "USER HAS BEEN ENTERED",
+                    "User":dict(request.form)
+                    })

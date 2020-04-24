@@ -5,13 +5,18 @@
 {% block content %}
 
     <p>{{ message }}</p>
-
-    <form action="/new_user" >
+    <div style="float: left; padding: 5px">
+        <form action="/new_user" method="POST" >
         
-        <button type="button" class="btn btn-primary">Add Users</button>
-    </form>
-
-    <form action="/twitter_users" >
-        <button type="button" class="btn btn-success">Show Users</button>  
-    </form>
+            <button class="button button2">Add Users</button>
+        </form>
+    
+    </div>
+    <div style="float: left; padding:5px">
+        <form action="/twitter_users" method="POST" >
+            <button class="button button3">Show Users</button>
+            
+        </form>
+    </div>
+    
 {% endblock %}
