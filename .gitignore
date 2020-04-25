@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Some of the files to ignore in my file
+*.db
+migrations/

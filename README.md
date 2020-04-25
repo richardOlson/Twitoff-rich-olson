@@ -28,3 +28,11 @@ set FLASK_APP=web_app
 flask run
 
 '''
+# How to set up a database
+'''sh
+FLASK_APP=web_app flask db init 
+
+
+FLASK_APP=web_app flask db migrate(with 
+FLASK_APP=web_app flask db upgrade 
+'''
