@@ -18,13 +18,16 @@ auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
 print(type(auth))
 
 api = tweepy.API(auth)
-print(type(api))
 
-# showing how to get the user from twitter
-user = api.get_user("elonmusk")
+if __name__ == "__main__":
+    print(type(api))
 
-statuses =  api.user_timeline("elonmusk", counts=35)
-statuses = api.user_timeline(screen_name, tweet_mode="extended", count=35, 
-                            exclude_replies=True, include_rts=False)
-# statatues are of the type tweepy.Status object
-breakpoint()
+    # showing how to get the user from twitter
+    user = api.get_user("elonmusk")
+
+    statuses =  api.user_timeline("elonmusk", counts=35)
+    statuses = api.user_timeline(screen_name, tweet_mode="extended", count=35, 
+                                exclude_replies=True, include_rts=False)
+    # statatues are of the type tweepy.Status object
+    breakpoint()
+

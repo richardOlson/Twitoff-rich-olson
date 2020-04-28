@@ -32,22 +32,23 @@
 <body>
     <div class="container">
         <div id="navbar">
-            {% block navbar %}
+            
                 <div>
-                    <div style="position: absolute; left: 10rem;">
+                    <div style="position: relative; left: 5rem;">
                         <h1><a href="/">Twittoff</a></h1>
+                        <div style="position: absolute; right: 12rem;">
+                            <ul>
+                                <li><a href="/twitter_users">Twitter users</a></li>
+                                <li><a href="/new_user">Add new user</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div style="position: absolute; right: 12rem;">
-                        <ul>
-                            <li><a href="/twitter_users">Twitter users</a></li>
-                            <li><a href="/new_user">Add new user</a></li>
-                        </ul>
-                    </div>
+                    
                     
 
                 </div>
                 
-            {% endblock %}
+            
 
         </div>
 

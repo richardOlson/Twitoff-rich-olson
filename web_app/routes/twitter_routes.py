@@ -11,7 +11,8 @@
 from flask import Flask, jsonify , render_template , request
 from flask import Blueprint, flash, redirect
 from web_app.models import db , Book
-
+from web_app.services.twitter_services import api as twiiter_api
+from web_app.models import User, db, Tweet
 
 
 twitter_routes = Blueprint("twitter_routes", __name__)
@@ -19,8 +20,26 @@ twitter_routes = Blueprint("twitter_routes", __name__)
 # This is the method that will return the a users data
 @twitter_routes.route("/users/<screen_name>/fetch")
 def fetch_user_data(screen_name):
+  
+  #TODO need to fetch the user info
+  user = twitter_api.get_user(screen_name)
+
+  # Checking to see if there is already the user in the 
+  # database doing a database query 
+  db_user= User.query.get(twitter_user.id) or User(id=user.id)
+  db_user.screen_name = user.screen_name
+  db_user.name = user.name
+  db_user.location = user.location
+  db_user.folowers_count = user.folowers_count
+  db.session.add(db_user)
+  db.session.commit()
+  # getting the statuses
+  statuses = twiiter_api.user_timeline(screen_name, tweet_mode="extended", count=35, 
+                                exclude_replies=True, include_rts=False)
+  # putting this in a database if they are not there
+
   print(screen_name)
-  return f"Fectched {screen_name}"
+  return jsonify({"user": user._json, "num_tweets": len(statuses)})
 
 
 # This is the method that will return the json version
