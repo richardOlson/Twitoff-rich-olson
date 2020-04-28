@@ -16,8 +16,15 @@ from web_app.models import db , Book
 
 twitter_routes = Blueprint("twitter_routes", __name__)
 
+# This is the method that will return the a users data
+@twitter_routes.route("/users/<screen_name>/fetch")
+def fetch_user_data(screen_name):
+  print(screen_name)
+  return f"Fectched {screen_name}"
+
+
 # This is the method that will return the json version
-# of the data
+# of the data of all the users
 @twitter_routes.route("/twitter_users.json")
 def list_users_json():
   #users = [
