@@ -27,39 +27,62 @@
         .button3 {background-color: #f44336;} /* Red */ 
         .button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
         .button5 {background-color: #555555;} /* Black */
+
+        .nav {
+            background-color:rgb(255, 215, 229); 
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            border-left: 600rem;
+            border-right: 600rem;
+            width: 100%;
+            
+        }
+        .nav li {
+            display: inline-block;
+            font-size: 20px;
+            padding: 20px;
+        }
+        .emp {
+            padding-bottom: 2rem;
+        }
+        .content {
+            margin: 0 auto;
+            width: 80%;
+        }
         </style>
 </head>
 <body>
     <div class="container">
         <div id="navbar">
             
-                <div>
-                    <div style="position: relative; left: 5rem;">
-                        <h1><a href="/">Twittoff</a></h1>
-                        <div style="position: absolute; right: 12rem;">
-                            <ul>
-                                <li><a href="/twitter_users">Twitter users</a></li>
-                                <li><a href="/new_user">Add new user</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    
+            <ul class="nav">
+                <li><a href="/">Twittoff</a></li>
+                <li><a href="/twitter_users">Twitter users</a></li>
+                <li><a href="/new_user">Add new user</a></li>
 
-                </div>
+            </ul>
+            <div class="emp"></div>               
+                        
+                        
+                     
                 
             
 
         </div>
 
     </div>
-    <div id="content">
-        {% block content %}
-
-        {% endblock %}
-
+    <div class="content">
+        
+            {% block content %}
+    
+            {% endblock %}
+    
+        
+   
     </div>
-
+    
    
 </body>
 </html>

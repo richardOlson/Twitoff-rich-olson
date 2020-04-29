@@ -21,4 +21,4 @@ def reset_db():
     else:
        # flash("OOPS Permission Denied", "danger")
         return redirect("/home")
-    return jasonify({"message":"DB RESET OK"})
+    return jsonify({"message":"DB RESET OK"})

@@ -17,3 +17,9 @@ def index():
 #    print("Just called the about route method")
 #    return f"TODO"
 
+
+@home_routes.route("/home")
+def display_oops():
+    oops_message = "Oops, you don't have authorization for that"
+    return render_template("oops.html", oops_message=oops_message)
+

@@ -8,10 +8,12 @@ from web_app.routes.admin_routes import admin_routes
 import os
 from web_app.models import db, migrate
 
-
+# going to use the os to make the path for the database
 # Creating the path to the database that we will use
 # C:\Users\porte\Richard_python\lambda\lam3\Twitoff-rich-olson
-DATABASE_URI = "sqlite:///C:\\Users\\porte\\Richard_python\\lambda\\lam3\\Twitoff-rich-olson\\twitter_development.db"
+DATA_PATH = os.path.join(os.path.dirname(__file__), os.path.pardir, "twitter_development.db" )
+DATABASE_URI = "sqlite:///" + DATA_PATH
+#DATABASE_URI = "sqlite:///C:\\Users\\porte\\Richard_python\\lambda\\lam3\\Twitoff-rich-olson\\twitter_development.db"
 SECRET_KEY = 'super secret'
 
 
@@ -21,6 +23,7 @@ SECRET_KEY = 'super secret'
 def create_app():
     app = Flask(__name__)
 
+    
     app.config["SECRET_KEY"] = SECRET_KEY
     
     app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
@@ -32,6 +35,7 @@ def create_app():
     app.register_blueprint(home_routes)
     app.register_blueprint(twitter_routes)
     app.register_blueprint(admin_routes)
+
     return app
 
 
