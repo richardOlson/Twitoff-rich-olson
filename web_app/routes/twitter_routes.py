@@ -13,9 +13,11 @@ from flask import Blueprint, flash, redirect
 from web_app.models import db , Book
 from web_app.services.twitter_services import api as twiiter_api
 from web_app.models import User, db, Tweet
-
+from web_app.statsmodels import train_twitter_model
 
 twitter_routes = Blueprint("twitter_routes", __name__)
+
+
 
 # This is the method that will return the a users data
 @twitter_routes.route("/users/<screen_name>/fetch")
@@ -37,11 +39,28 @@ def fetch_user_data(screen_name):
   statuses = twiiter_api.user_timeline(screen_name, tweet_mode="extended", count=35, 
                                 exclude_replies=True, include_rts=False)
   # putting this in a database if they are not there
+  #TODO Need to put the tweets into the database
 
+  # TODO Nedd to get the embeddings lesson 2
   print(screen_name)
   return jsonify({"user": user._json, "num_tweets": len(statuses)})
 
 
+# This is the Route that will be used when doing the prediction
+@stats_route.route("/twitter/predict", methods=["GET", "POST"])
+def make_prediction():
+  name1 = request.form["name1"]
+  name2 = request.form["name2"]
+  tweet = request.form["tweet"]
+
+  fetch_user_data(name1)
+  fetch_user_data(name2)
+  # now making the prediction for the two users
+  model = train_twitter_model(name1, name2)
+
+
+  breakpoint()
+  request.json()
 # This is the method that will return the json version
 # of the data of all the users
 @twitter_routes.route("/twitter_users.json")
@@ -73,8 +92,9 @@ def list_users():
 
 #This is the route that is used to render the form that will allow you
 # to then enter the information to add a user to the database
-@twitter_routes.route("/new_user" , methods=["POST", "GET"])
+@twitter_routes.route("/users/guess" , methods=["POST", "GET"])
 def user_form():
+  # ToDo will need to Fix this
     print("We are adding the user")
     return render_template("new_user.html")
 

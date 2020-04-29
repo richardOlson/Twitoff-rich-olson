@@ -11,14 +11,23 @@
 
 
 
-    <form action="/users/<screen_name>/fetch" method="POST">
+    <form action="/users/guess" method="POST">
 
-        <label for="name">Twitter username</label>
-        <input type="text" name="name" id="name" value="screen_name">
+        <p>Enter two different twitter users and and a tweet.</p>
+        <p>Press the button and will use our model to see who is most likely to have tweeted the tweet</p>
+
+        <label for="name1">Twitter username 1</label>
+        <input type="text" name="name1" id="name1" >
+        
+        <label for="name2">Twitter username 2</label>
+        <input type="text" name="name2", id="name2">
 
         <button class="button button2">Submit</button>
 
     </form>
+    <div style="padding-top: 12px;">
+        {{ the_answer}}
+    </div>
 </div>
 
 

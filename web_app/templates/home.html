@@ -3,22 +3,35 @@
 
 
 {% block content %}
-    <div>
+    <div style="padding-bottom: 5px;">
         <p>{{ message }}</p>
     </div>
     
-    <div style="float: left; padding: 5px">
-        <form action="/new_user" method="POST" >
+    <div class="content">
         
-            <button class="button button2">Add Users</button>
-        </form>
     
-    </div>
-    <div style="float: left; padding:5px">
-        <form action="/twitter_users" method="POST" >
-            <button class="button button3">Show Users</button>
+    
+    
+        <form action="/users/predict" method="POST">
+    
+            <p>Enter two different twitter users and and a tweet.</p>
+            <p>Press the button and will use our model to see who is most likely to have tweeted the tweet</p>
+    
+            <label for="name1">Twitter username 1</label>
+            <input type="text" name="name1" id="name1" >
             
+            <label for="name2">Twitter username 2</label>
+            <input type="text" name="name2", id="name2">
+            
+            <label for="tweet">The tweet</label>
+            <input type="text" name=tweet, id=tweet>
+    
+            <button class="button button2">Who said it</button>
+    
         </form>
+        <div style="padding-top: 12px;">
+            {{ the_answer}}
+        </div>
     </div>
     
 {% endblock %}
