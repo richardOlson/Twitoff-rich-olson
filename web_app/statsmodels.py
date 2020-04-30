@@ -52,8 +52,9 @@ def train_twitter_model(user1, user2):
     for tweet in tweets2:
         userList.append(user2.screen_name)
         embeddings.append(tweet.embedding)
+    
 
-    classifier.fit(embeddings, screen_names)
+    classifier.fit(embeddings, userList)
     # returning the model to do the prediction
     return classifier
     

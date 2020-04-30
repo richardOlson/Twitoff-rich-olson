@@ -15,11 +15,12 @@ from web_app.services.twitter_services import api as twitter_api
 from web_app.models import User, db, Tweet
 from web_app.services.basilica_service import basilica_connection
 from web_app.statsmodels import train_twitter_model
-
+from web_app.helper import enough_tweets
 
 twitter_routes = Blueprint("twitter_routes", __name__)
 
-# This is the method that will return the a users data
+# This is the method that will add a user and their tweets
+# to the database
 @twitter_routes.route("/user/add", methods=["GET", "POST"])
 @twitter_routes.route("/users/<screen_name>/add", methods=["GET", "POST"])
 def add_user_data(screen_name=None):
@@ -30,7 +31,7 @@ def add_user_data(screen_name=None):
   try:
     twit_user = twitter_api.get_user(screen_name)
   except:
-    return render_template("/notFound", screen_name=screen_name)
+    return render_template("notFound.html", screen_name=screen_name)
 
 
   # Checking to see if there is already the user in the 
@@ -46,7 +47,27 @@ def add_user_data(screen_name=None):
   # getting the statuses
   statuses = twitter_api.user_timeline(screen_name, tweet_mode="extended", count=200, 
                                 exclude_replies=True, include_rts=False)
-  tweets = []
+  
+ 
+  if not enough_tweets(1, db_user, statuses, screen_name):
+    oops_message = f"Oops!  {screen_name} doesn't appear to have enough tweets to use"
+    return render_template("oops.html", oops_message=oops_message)
+
+  # will be getting  more tweets if there are only a few
+  while len(statuses) < 200:
+    more_statuses = twitter_api.user_timeline(screen_name, max_id=statuses[-1].id,
+                                              tweet_mode="extended", count=200, exclude_replies=True, 
+                                              include_rts=False)
+    if len(more_statuses) == 0: # This happens when there are no more tweets to get
+      break
+    # Adding all the statuses together
+    statuses = statuses + more_statuses
+  
+  if not enough_tweets(3, db_user, statuses, screen_name):
+    oops_message = f"Oops!  {screen_name} doesn't appear to have enough tweets to use"
+    return render_template("oops.html", oops_message=oops_message)
+
+  tweets = []     
   # getting the tweets using list comprehension
   tweets = [status.full_text for status in statuses]
 
@@ -67,6 +88,10 @@ def add_user_data(screen_name=None):
   print(screen_name)
   #return jsonify({"user": twit_user._json, "num_tweets": len(statuses)})
   return render_template("new_user.html", the_message=message)
+
+
+
+
 
 
 # This is the route that will be called to bring up the form to 
@@ -94,6 +119,9 @@ def prediction_page():
 @twitter_routes.route("/users/predict", methods=["POST", "GET"])
 def predict():
 
+  users = User.query.all()
+  num_users = len(users)
+
   try:
     user1 = request.form['name1']
     user2 = request.form["name2"]
@@ -101,11 +129,10 @@ def predict():
   except:
     the_answer = f"Something was wrong with the prediction.  Make sure all field are entered in."
     # Getting the users from the database
-    users = User.query.all()
-    num_users = len(users)
+    
     return render_template("predict.html", the_answer=the_answer, num_users=num_users, users=users)
   
-  breakpoint()
+  
   # getting the embedding for the tweet
   tweet_embedding = basilica_connection.embed_sentence(tweet, model="twitter")
   #Query the users from the database
@@ -116,10 +143,16 @@ def predict():
   # This is done inside the "train_twitter_model" function
   theModel = train_twitter_model(user_1, user_2)
 
+
+  print("Doing the prediction")
   # Using the model to make the prediction
-  result = theModel.predict(tweet_embedding)
-  breakpoint()
-  print("At the breakpoint")
+  result = theModel.predict([tweet_embedding])
+  
+  the_answer = f"{result[0]} is most likely to have tweeted that"
+
+  return render_template("predict.html", users=users, num_users=num_users, the_answer=the_answer)
+
+
 
 
 
