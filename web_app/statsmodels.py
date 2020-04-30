@@ -32,13 +32,26 @@ def load_model():
 
 # This is the method that will be used to train the 
 # for the twitter prediction
+# The user1 and user2 are from the data base
 def train_twitter_model(user1, user2):
 
     classifier = LogisticRegression(random_state=49, solver="lbfgs", multi_class="multinomial")
     # will get the embeddings and the screen name for the 
     # two different  users
     embeddings = []
-    screen_names = []
+    userList = []
+
+    tweets1 = user1.tweets
+    tweets2 = user2.tweets
+
+    # Getting the embedding from the tweets
+    for tweet in tweets1:
+        userList.append(user1.screen_name)
+        embeddings.append(tweet.embedding)
+
+    for tweet in tweets2:
+        userList.append(user2.screen_name)
+        embeddings.append(tweet.embedding)
 
     classifier.fit(embeddings, screen_names)
     # returning the model to do the prediction

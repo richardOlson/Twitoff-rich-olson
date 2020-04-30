@@ -7,22 +7,20 @@
 
 <div class="content">
     <h1>Add a new user</h1>
-    <p>Please fill out the form and then submit to add to user list</p>
+    <p>Please fill out the form and then submit to add a user to the database</p>
 
 
 
-    <form action="/users/guess" method="POST">
+    <form action="/user/add" method="POST">
 
-        <p>Enter two different twitter users and and a tweet.</p>
-        <p>Press the button and will use our model to see who is most likely to have tweeted the tweet</p>
-
-        <label for="name1">Twitter username 1</label>
-        <input type="text" name="name1" id="name1" >
         
-        <label for="name2">Twitter username 2</label>
-        <input type="text" name="name2", id="name2">
 
-        <button class="button button2">Submit</button>
+        <label for="twitter_name">Twitter handle</label>
+        <input type="text" name="twitter_name" id="name1" >
+        
+        
+
+        <button class="button button2">Add</button>
 
     </form>
     <div style="padding-top: 12px;">

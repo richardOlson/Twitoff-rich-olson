@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h3>The twitter handle, {{ screen_name }} is not found</h3>
+    <div style="padding-top: 10px;">
+        <h3>Check to see if twitter name is correctly spelled</h3>
+    </div>
+    <form action="/user/add/form" method="POST">
+        <button class="button button2">Try Again</button>
+    </form>
+
+
+
+
+{% endblock %}

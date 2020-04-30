@@ -9,7 +9,7 @@
     
     <div class="content">
         
-    
+        {% if num_users > 1 %}
     
     
         <form action="/users/predict" method="POST">
@@ -32,6 +32,9 @@
         <div style="padding-top: 12px;">
             {{ the_answer}}
         </div>
+        {% else %}
+            <h2>Please add some users so that you can make predictions</h2>
+        {% endif %}
     </div>
     
 {% endblock %}

@@ -1,0 +1,62 @@
+
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div style="padding-bottom: 5px;">
+    <p>{{ message }}</p>
+</div>
+
+<div class="content">
+    
+
+
+
+    <form action="" method="POST">
+
+        
+        {% if num_users > 1 %}
+
+            <p>Enter two different twitter users and and a tweet.</p>
+            <p>Press the button, and we will use our model to see who is most likely to have tweeted the tweet</p>
+        
+            
+            <select name="name1" id="name1">
+                {% for user in users %}
+                <option value=user.name>user.screen_name</option>
+                
+                {% endfor %}
+                <option value="none" selected disabled hidden> 
+                    Select first twitter user 
+                </option>
+            </select>
+            
+            <select name="name2" id="name2">
+                {% for user in users %}
+                <option value=user.name>user.screen_name</option>
+                {% endfor %}
+                <option value="none" selected disabled hidden> 
+                    Select first twitter user 
+                </option>
+            </select>
+
+            <label for="tweet">Type a tweet here</label>
+            <input type="text" name="tweet">
+        
+
+            <button class="button button2">Who said it</button>
+            {% else %}
+                <h1>You need to enter some users before predicting</h1>
+            {% endif %}
+
+    </form>
+    <div style="padding-top: 12px;">
+        {{ the_answer }}
+    </div>
+</div>
+
+
+
+
+{% endblock %}
