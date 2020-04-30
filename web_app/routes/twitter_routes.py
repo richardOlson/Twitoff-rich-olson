@@ -105,7 +105,7 @@ def predict():
     num_users = len(users)
     return render_template("predict.html", the_answer=the_answer, num_users=num_users, users=users)
   
-
+  breakpoint()
   # getting the embedding for the tweet
   tweet_embedding = basilica_connection.embed_sentence(tweet, model="twitter")
   #Query the users from the database

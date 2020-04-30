@@ -28,7 +28,7 @@
             
                 <select name="name1" id="name1">
                     {% for user in users %}
-                    <option value=user.name>{{user.screen_name}}</option>
+                    <option value= {{ user.screen_name }}>{{user.screen_name}}</option>
                     
                     {% endfor %}
                     <option value="none" selected disabled hidden> 
@@ -38,7 +38,7 @@
                 
                 <select name="name2" id="name2">
                     {% for user in users %}
-                    <option value=user.name>{{ user.screen_name}}</option>
+                    <option value={{ user.screen_name }}>{{ user.screen_name}}</option>
                     {% endfor %}
                     <option value="none" selected disabled hidden> 
                         Select second twitter user 
