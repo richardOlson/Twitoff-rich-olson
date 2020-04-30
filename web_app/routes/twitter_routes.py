@@ -44,7 +44,7 @@ def add_user_data(screen_name=None):
   db.session.add(db_user)
   db.session.commit()
   # getting the statuses
-  statuses = twitter_api.user_timeline(screen_name, tweet_mode="extended", count=300, 
+  statuses = twitter_api.user_timeline(screen_name, tweet_mode="extended", count=200, 
                                 exclude_replies=True, include_rts=False)
   tweets = []
   # getting the tweets using list comprehension
@@ -52,19 +52,21 @@ def add_user_data(screen_name=None):
 
   # fetching the embeddings
   embeddings = list(basilica_connection.embed_sentences(tweets, model="twitter"))
-
+  
   #loading the new model
   for i in range(len(statuses)):
     db_tweet = Tweet.query.get(statuses[i].id) or Tweet(id= statuses[i].id)
     db_tweet.user_id = statuses[i].author.id
     db_tweet.full_text = statuses[i].full_text
-    db_tweet.embeddings = embeddings[i]
+    db_tweet.embedding = embeddings[i]
     db.session.add(db_tweet)
   # committing all the adds that have been done
   db.session.commit()
 
+  message = f"{screen_name} has been succesfully added to the database" 
   print(screen_name)
-  return jsonify({"user": twit_user._json, "num_tweets": len(statuses)})
+  #return jsonify({"user": twit_user._json, "num_tweets": len(statuses)})
+  return render_template("new_user.html", the_message=message)
 
 
 # This is the route that will be called to bring up the form to 
@@ -89,11 +91,20 @@ def prediction_page():
 
 # This is the method that will do the prediction when
 # the form is filled and submitted
-@twitter_routes.route("/users/predict", methods=["POST"])
+@twitter_routes.route("/users/predict", methods=["POST", "GET"])
 def predict():
-  user1 = request.form['name1']
-  user2 = request.form["name2"]
-  tweet = request.form["tweet"]
+
+  try:
+    user1 = request.form['name1']
+    user2 = request.form["name2"]
+    tweet = request.form["tweet"]
+  except:
+    the_answer = f"Something was wrong with the prediction.  Make sure all field are entered in."
+    # Getting the users from the database
+    users = User.query.all()
+    num_users = len(users)
+    return render_template("predict.html", the_answer=the_answer, num_users=num_users, users=users)
+  
 
   # getting the embedding for the tweet
   tweet_embedding = basilica_connection.embed_sentence(tweet, model="twitter")

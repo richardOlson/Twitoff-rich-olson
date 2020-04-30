@@ -7,34 +7,7 @@
         <p>{{ message }}</p>
     </div>
     
-    <div class="content">
-        
-        {% if num_users > 1 %}
+    {% extends "predict.html" %}
     
-    
-        <form action="/users/predict" method="POST">
-    
-            <p>Enter two different twitter users and and a tweet.</p>
-            <p>Press the button and will use our model to see who is most likely to have tweeted the tweet</p>
-    
-            <label for="name1">Twitter username 1</label>
-            <input type="text" name="name1" id="name1" >
-            
-            <label for="name2">Twitter username 2</label>
-            <input type="text" name="name2", id="name2">
-            
-            <label for="tweet">The tweet</label>
-            <input type="text" name=tweet, id=tweet>
-    
-            <button class="button button2">Who said it</button>
-    
-        </form>
-        <div style="padding-top: 12px;">
-            {{ the_answer}}
-        </div>
-        {% else %}
-            <h2>Please add some users so that you can make predictions</h2>
-        {% endif %}
-    </div>
     
 {% endblock %}
