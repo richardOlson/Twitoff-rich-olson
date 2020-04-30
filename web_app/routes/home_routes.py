@@ -15,7 +15,8 @@ def index():
     # with
     users = User.query.all()
     num_users = len(users)
-    return render_template("home.html", message=message, num_users=num_users)
+    
+    return render_template("predict.html", message=message, num_users=num_users, users=users)
 #
 #@home_routes.route("/about")
 #def about():

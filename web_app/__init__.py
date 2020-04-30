@@ -14,8 +14,10 @@ from web_app.models import db, migrate
 # C:\Users\porte\Richard_python\lambda\lam3\Twitoff-rich-olson
 DATA_PATH = os.path.join(os.path.dirname(__file__), os.path.pardir, "twitter_development.db" )
 DATABASE_URI = "sqlite:///" + DATA_PATH
+
+POSTGRES_URL = os.getenv("POSTGRES_URL")
 #DATABASE_URI = "sqlite:///C:\\Users\\porte\\Richard_python\\lambda\\lam3\\Twitoff-rich-olson\\twitter_development.db"
-SECRET_KEY = 'super secret'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 
