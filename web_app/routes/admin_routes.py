@@ -5,8 +5,11 @@ import os
 
 load_dotenv()
 
-# Getting the api key
-API_KEY = os.getenv("API_KEY")
+# Getting the api key this is for local
+#API_KEY = os.getenv("API_KEY")
+
+# this is for production
+API_KEY = "abc123"
 
 admin_routes = Blueprint("admin_routes", __name__)
 

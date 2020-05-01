@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 def create_app():
     app = Flask(__name__)
 
-    
+    # This is to be able to use flash messaging if we wanted
     app.config["SECRET_KEY"] = SECRET_KEY
     
     app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
