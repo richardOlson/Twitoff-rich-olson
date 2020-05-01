@@ -36,3 +36,8 @@ FLASK_APP=web_app flask db init
 FLASK_APP=web_app flask db migrate(with 
 FLASK_APP=web_app flask db upgrade 
 '''
+
+To run locally there is a portion in the __init__.py file that needs
+to be uncommented to allow the database to use the sqlite, (local)
+database. It is set up to work on different computers that may have 
+different file structures.  Some code needs to be commented out that will look for an environment variable (used for when in production on a server.)

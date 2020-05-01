@@ -12,10 +12,17 @@ from web_app.models import db, migrate
 # going to use the os to make the path for the database
 # Creating the path to the database that we will use
 # C:\Users\porte\Richard_python\lambda\lam3\Twitoff-rich-olson
-DATA_PATH = os.path.join(os.path.dirname(__file__), os.path.pardir, "twitter_development.db" )
-DATABASE_URI = "sqlite:///" + DATA_PATH
+# will make the enviroment variable for the database url
+# will comment this out this part below if for only when 
+# in local production
+#DATA_PATH = os.path.join(os.path.dirname(__file__), os.path.pardir, "twitter_development.db" )
+#DATABASE_URL = "sqlite:///" + DATA_PATH
 
-POSTGRES_URL = os.getenv("POSTGRES_URL")
+
+# This part below is for only when in production on the server
+# needs to be commented out when run locally
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 #DATABASE_URI = "sqlite:///C:\\Users\\porte\\Richard_python\\lambda\\lam3\\Twitoff-rich-olson\\twitter_development.db"
 SECRET_KEY = os.getenv('SECRET_KEY')
 
@@ -29,7 +36,7 @@ def create_app():
     
     app.config["SECRET_KEY"] = SECRET_KEY
     
-    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
 
