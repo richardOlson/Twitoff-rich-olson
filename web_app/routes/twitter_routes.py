@@ -140,7 +140,7 @@ def predict():
   user_2 = User.query.filter(User.screen_name == user2).one()
 
   # Getting the tweets from each person
-  # This is done inside the "train_twitter_model" function
+  # This is done inside the "train_twitter_model" function in the statsmodel.py file
   theModel = train_twitter_model(user_1, user_2)
 
 
