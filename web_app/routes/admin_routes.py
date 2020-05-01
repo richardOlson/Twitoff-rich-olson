@@ -52,4 +52,4 @@ def remove_one(screen_name):
         return render_template("oops.html", oops_message=mess)
     
     mess = f"You don't have the security access to do that"
-    return render_template("oops.html", oops_message=)
+    return render_template("oops.html", oops_message=mess)
