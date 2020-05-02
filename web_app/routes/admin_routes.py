@@ -33,7 +33,7 @@ def remove_one(screen_name):
 
     if "api_key" in dict(request.args) and request.args["api_key"] == API_KEY:
 
-        
+              
         user = User.query.filter(User.screen_name == screen_name).one()
         # if it can't find the user in the database
         if user == None:
@@ -43,11 +43,11 @@ def remove_one(screen_name):
 
         if tweets != None and len(tweets) > 0:
             for tweet in tweets:
-                db.delete(tweet)
-            db.commit()
+                db.session.delete(tweet)
+            db.session.commit()
         
-        db.delete(user)
-        db.commit()
+        db.session.delete(user)
+        db.session.commit()
         mess = f"{screen_name} was removed from the database!"
         return render_template("oops.html", oops_message=mess)
     
