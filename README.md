@@ -41,3 +41,6 @@ To run locally there is a portion in the __init__.py file that needs
 to be uncommented to allow the database to use the sqlite, (local)
 database. It is set up to work on different computers that may have 
 different file structures.  Some code needs to be commented out that will look for an environment variable (used for when in production on a server.)
+
+Also in the admin_routes a change was made taking the api key from the .env to into the file itself
+for production.
