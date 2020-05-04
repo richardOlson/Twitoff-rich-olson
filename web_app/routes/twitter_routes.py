@@ -189,7 +189,7 @@ def list_users():
   
   message = "Users currently found in our database"    
   return render_template("users.html", message=message, 
-                          users=users tweetlen=tweetlen, len=the_len)
+                          users=users, tweetlen=tweetlen, len=the_len)
 
 
 #This is the route that is used to render the form that will allow you
