@@ -180,13 +180,16 @@ def list_users():
 
    #]
   users = User.query.all()
-  len
+  the_len = len(users)
+  tweetlen = []
   if users != None:
-    for 
+    for user in users:
+      the_tweets = user.tweets
+      tweetlen.append(len(the_tweets))
   
   message = "Users currently found in our database"    
   return render_template("users.html", message=message, 
-                          users=users tweetlen=tweetlen, len=len)
+                          users=users tweetlen=tweetlen, len=the_len)
 
 
 #This is the route that is used to render the form that will allow you
