@@ -24,13 +24,17 @@ twitter_routes = Blueprint("twitter_routes", __name__)
 @twitter_routes.route("/user/add", methods=["GET", "POST"])
 @twitter_routes.route("/users/<screen_name>/add", methods=["GET", "POST"])
 def add_user_data(screen_name=None):
-  
+  print(twitter_api)
   # checking if the request form in None
   screen_name = request.form["twitter_name"]
+  breakpoint()
   #TODO need to fetch the user info
+  
   try:
     twit_user = twitter_api.get_user(screen_name)
+    
   except:
+    # will check why was not found in here
     return render_template("notFound.html", screen_name=screen_name)
 
 
