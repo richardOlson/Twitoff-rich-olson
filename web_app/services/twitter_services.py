@@ -36,7 +36,7 @@ if  __name__ == "__main__":
     statuses = api.user_timeline("elonmusk", tweet_mode="extended", count=35, 
                                 exclude_replies=True, include_rts=False)
 
-    breakpoint()
+    
     
     # statatues are of the type tweepy.Status object
     tweets = []
