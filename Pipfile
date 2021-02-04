@@ -18,6 +18,7 @@ scikit-learn = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 spacy = "*"
+en-core-web-md = {file = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.0.0/en_core_web_md-3.0.0-py3-none-any.whl"}
 
 [requires]
 python_version = "3.7"

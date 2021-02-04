@@ -37,7 +37,7 @@ def add_user_data(screen_name=None):
     # will check why was not found in here
     return render_template("notFound.html", screen_name=screen_name)
 
-  breakpoint()
+  
   # Checking to see if there is already the user in the 
   # database doing a database query 
   db_user= User.query.get(twit_user.id) or User(id=twit_user.id)
