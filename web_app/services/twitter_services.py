@@ -28,13 +28,13 @@ if  __name__ == "__main__":
     print(f"This is the type of the api for twitter {type(api)}")
 
     # showing how to get the user from twitter
-    user = api.get_user("elonmusk")
-    breakpoint()
+    user = api.get_user("@realMeetKevin")
+    
     # a statuses < a list of status> each status contains
     # info about a tweet
-    statuses =  api.user_timeline("elonmusk", counts=35)
+    # statuses =  api.user_timeline(user.screen_name, counts=35)
     # won't show the retweets unless "incluce_rts" == True
-    statuses = api.user_timeline("elonmusk", tweet_mode="extended", count=35, 
+    statuses = api.user_timeline(user.screen_name, tweet_mode="extended", count=35, 
                                 exclude_replies=True, include_rts=True)
 
     

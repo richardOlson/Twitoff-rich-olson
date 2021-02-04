@@ -17,6 +17,7 @@ basilica = "*"
 scikit-learn = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+spacy = "*"
 
 [requires]
 python_version = "3.7"
