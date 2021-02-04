@@ -15,27 +15,32 @@ following packages:
 
 ## Usage
 
-'''sh
+```sh
 # Mac:
 FLASK_APP=hello.py flask run
+
+
+
+
 
 # Windows:
 export FLASK_APP=hello.py   
 flask run
 
+
+
 # Windows alternatively:
 set FLASK_APP=web_app
 flask run
 
-'''
 # How to set up a database
-'''sh
+
 FLASK_APP=web_app flask db init 
 
 
 FLASK_APP=web_app flask db migrate(with 
 FLASK_APP=web_app flask db upgrade 
-'''
+```
 
 To run locally there is a portion in the __init__.py file that needs
 to be uncommented to allow the database to use the sqlite, (local)

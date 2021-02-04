@@ -27,13 +27,17 @@ def add_user_data(screen_name=None):
   
   # checking if the request form in None
   screen_name = request.form["twitter_name"]
+  
   #TODO need to fetch the user info
+  
   try:
     twit_user = twitter_api.get_user(screen_name)
+    
   except:
+    # will check why was not found in here
     return render_template("notFound.html", screen_name=screen_name)
 
-
+  
   # Checking to see if there is already the user in the 
   # database doing a database query 
   db_user= User.query.get(twit_user.id) or User(id=twit_user.id)
@@ -44,11 +48,15 @@ def add_user_data(screen_name=None):
   
   db.session.add(db_user)
   db.session.commit()
+  
+  print(f"getting the statuses for the user {twit_user.screen_name}")
   # getting the statuses
   statuses = twitter_api.user_timeline(screen_name, tweet_mode="extended", count=200, 
                                 exclude_replies=True, include_rts=False)
   
- 
+ # This method will check to see if there is enough tweets and then will 
+ # return true if the person was not deleted from the database.
+ # will return false if the person is deleted from the database.
   if not enough_tweets(1, db_user, statuses, screen_name):
     oops_message = f"Oops!  {screen_name} doesn't appear to have enough tweets to use"
     return render_template("oops.html", oops_message=oops_message)
@@ -62,7 +70,8 @@ def add_user_data(screen_name=None):
       break
     # Adding all the statuses together
     statuses = statuses + more_statuses
-  
+  # While in the while loop, if there is not enough tweets at this point 3 then 
+  # the person is deleted from the database
   if not enough_tweets(3, db_user, statuses, screen_name):
     oops_message = f"Oops!  {screen_name} doesn't appear to have enough tweets to use"
     return render_template("oops.html", oops_message=oops_message)
@@ -72,6 +81,8 @@ def add_user_data(screen_name=None):
   tweets = [status.full_text for status in statuses]
 
   # fetching the embeddings
+  # basilica is now not working so will need to get another method of getting the embeddings
+  # of the tweets
   embeddings = list(basilica_connection.embed_sentences(tweets, model="twitter"))
   
   #loading the new model

@@ -8,6 +8,10 @@ from web_app.routes.admin_routes import admin_routes
 from web_app.routes.stats_route import stats_routes
 import os
 from web_app.models import db, migrate
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # going to use the os to make the path for the database
 # Creating the path to the database that we will use
