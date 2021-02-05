@@ -15,7 +15,8 @@ from web_app.services.twitter_services import api as twitter_api
 from web_app.models import User, db, Tweet
 from web_app.services.basilica_service import basilica_connection
 from web_app.statsmodels import train_twitter_model
-from web_app.helper import enough_tweets
+from web_app.helper import enough_tweets, nlp_global
+
 
 twitter_routes = Blueprint("twitter_routes", __name__)
 
@@ -83,8 +84,10 @@ def add_user_data(screen_name=None):
   # fetching the embeddings
   # basilica is now not working so will need to get another method of getting the embeddings
   # of the tweets
-  embeddings = list(basilica_connection.embed_sentences(tweets, model="twitter"))
+  # embeddings = list(basilica_connection.embed_sentences(tweets, model="twitter"))
   
+  # making the embeddings
+  embeddings = nlp_global[0].get_embedding(tweets)
   #loading the new model
   for i in range(len(statuses)):
     db_tweet = Tweet.query.get(statuses[i].id) or Tweet(id= statuses[i].id)
@@ -143,10 +146,11 @@ def predict():
     
     return render_template("predict.html", the_answer=the_answer, num_users=num_users, users=users)
   
-  
+  # basilica is no longer being used and therefore is deprecated
   # getting the embedding for the tweet
-  tweet_embedding = basilica_connection.embed_sentence(tweet, model="twitter")
-  #Query the users from the database
+  # tweet_embedding = basilica_connection.embed_sentence(tweet, model="twitter")
+  tweet_embedding = nlp_global[0].get_sentence_embedding(tweet)
+  # Query the users from the database
   user_1 = User.query.filter(User.screen_name == user1).one()
   user_2 = User.query.filter(User.screen_name == user2).one()
 

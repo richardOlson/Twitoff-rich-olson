@@ -13,7 +13,7 @@ import en_core_web_md
 # This is the global variable
 # This variable will hold the instance of the NLP class when the 
 # function "build_class" is called
-nlp_global = None
+nlp_global = []
 
 
 # This function
@@ -51,16 +51,46 @@ class NLP:
     # This function will return a list if a list of embeddings if
     # a list is given to it or will just return a single embedding vector of 300 shape
     # if a single sentance is given to it
-    def get_embedding(self, doc: str):
-        the_document = self.nlp(doc)
-        return the_document.vector
-    # 
+    def get_embedding(self, sentences):
+        """
+        The docs can be either a list of sentances or can be just one sentance.
+        This function will return the embedding of all the embeddings that are passed in.
+        If only one sentance is passed in, then it will return a vector of that sentance.
+        If a list of sentences is passed in, then it will return a list of vectors.
+        """
+        # making the return list
+        return_list = []
+
+        if not isinstance(sentences, list):
+            sentences = [sentences]
+
+        for sentence in sentences:
+            doc = self.nlp(sentence)
+            return_list.append(doc.vector)
+        
+        
+        return return_list
+
+    
+
+    # This is the function that will get just one sentence embeding
+    def get_sentence_embedding(self, sentance: str):
+        """
+        This method will get the embedding of just one sentence
+        and will return the vector of the sentance.
+        """
+        the_list = self.get_embedding(sentance)
+        return the_list[0]
+        
+    
 
 # This the function that will be called in the init that will make an
 # instance of the nlp class.
 def build_class():
-    nlp_global = NLP()
+    
+    nlp_global.append(NLP())
 
 if __name__ == "__main__":
-    nlp = get_nlp()
-    print(type(nlp))
+    build_class()
+    print(f"The type of the nlp_global is {type(nlp_global)}")
+    
