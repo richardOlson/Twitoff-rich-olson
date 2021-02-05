@@ -9,6 +9,7 @@ from web_app.routes.stats_route import stats_routes
 import os
 from web_app.models import db, migrate
 from dotenv import load_dotenv
+from web_app.helper import build_class
 
 
 load_dotenv()
@@ -31,7 +32,9 @@ DATABASE_URL = "sqlite:///" + DATA_PATH
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 
-
+# this is getting the nlp ready so that we can then use it for 
+# doing the embeddings
+build_class()
 
 # creating the app the an app factory
 def create_app():
