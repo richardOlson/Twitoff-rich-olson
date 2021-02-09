@@ -1,6 +1,11 @@
 # Twitoff-rich-olson
 Repository for the Twitoff app
 
+# About the App
+This repository contains an app built using flask and flask-sqlalchemy.  
+This app allows the user to enter twitter users.  The user can then enter a sample tweet, the app can then
+be used to predict which of the users would most likely have tweeted the sample tweet.    
+
 
 ## Instalation
 
@@ -20,18 +25,10 @@ following packages:
 FLASK_APP=hello.py flask run
 
 
-
-
-
 # Windows:
-export FLASK_APP=hello.py   
-flask run
-
-
-
-# Windows alternatively:
 set FLASK_APP=web_app
 flask run
+
 
 # How to set up a database
 
