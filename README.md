@@ -3,8 +3,11 @@ Repository for the Twitoff app
 
 # About the App
 This repository contains an app built using flask and flask-sqlalchemy.  
-This app allows the user to enter twitter users.  The user can then enter a sample tweet, the app can then
-be used to predict which of the users would most likely have tweeted the sample tweet.    
+This app allows the user to enter twitter users.  The user can then enter a 
+sample tweet, the app can then be used to predict which of the users would 
+most likely have tweeted the sample tweet.
+
+Embeddings are built with Spacy.
 
 
 ## Instalation
