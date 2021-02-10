@@ -132,7 +132,4 @@ dmypy.json
 *.db
 migrations/
 
-# Trying to ingore the pipfile and the pipfile lock so to build with 
-# just the requirements.txt file
-Pipfile
-Pipfile.lock
+
