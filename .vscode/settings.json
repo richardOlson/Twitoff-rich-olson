@@ -2,5 +2,6 @@
     "python.linting.pylintArgs": [
         "--load-plugins",
         "pylint-flask"
-    ]
+    ],
+    "python.pythonPath": "C:\\Users\\porte\\Anaconda3\\envs\\lam4-nnf-s2\\python.exe"
 }
