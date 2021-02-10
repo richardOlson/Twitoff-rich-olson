@@ -131,3 +131,7 @@ dmypy.json
 # Some of the files to ignore in my file
 *.db
 migrations/
+
+# Trying to ingore the pipfile and the pipfile lock so to build with 
+# just the requirements.txt file
+Pipfile*
